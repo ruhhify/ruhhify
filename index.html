@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruh - Inspired from Within</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #ffffff;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, #FFE156 0%, #FFB199 100%);
+            top: -10%; left: -10%;
+            animation-delay: 0s;
+        }
+        .orb2 {
+            width: 400px; height: 400px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            top: 50%; right: -5%;
+            animation-delay: 5s;
+        }
+        .orb3 {
+            width: 450px; height: 450px;
+            background: linear-gradient(135deg, #FF9FCE 0%, #E19FFF 100%);
+            bottom: -10%; left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        .mystical-particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .mystical-symbols {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .symbol {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            animation: floatSymbol 25s ease-in-out infinite;
+        }
+
+        @keyframes floatSymbol {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 0.15; }
+            50% { transform: translateY(-20vh) rotate(360deg); }
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 159, 206, 0.6) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            opacity: 0;
+        }
+
+        .energy-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 159, 206, 0.3);
+            border-radius: 50%;
+            animation: expandRing 4s ease-out infinite;
+        }
+
+        @keyframes expandRing {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 300px; height: 300px; opacity: 0; }
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFE156 0%, #FFB199 40%, #FF9FCE 70%, #E19FFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-decoration: none;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 159, 206, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 159, 206, 0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FFB199;
+            text-shadow: 0 0 10px rgba(255, 177, 153, 0.6);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #FFB199, #FF9FCE);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 159, 206, 0.6);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 60px 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 120px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFE156 0%, #FFB199 40%, #FF9FCE 70%, #E19FFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 8px;
+            animation: fadeInUp 1s ease-out, titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 159, 206, 0.4)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 159, 206, 0.8)); }
+        }
+
+        .hero-tagline {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button {
+            margin-top: 50px;
+            padding: 18px 50px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before { width: 300px; height: 300px; }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 159, 206, 0.6), 0 0 40px rgba(255, 159, 206, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.4);
+            filter: drop-shadow(0 0 10px rgba(255, 159, 206, 0.4));
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ── Sections ── */
+        .section {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            animation: sectionGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes sectionGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 159, 206, 0.3)); }
+            50% { filter: drop-shadow(0 0 25px rgba(255, 159, 206, 0.6)); }
+        }
+
+        .section-content {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        /* ── Services ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 159, 206, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            animation: rotateGradient 10s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 177, 153, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 159, 206, 0.3), 0 0 60px rgba(255, 159, 206, 0.2);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 159, 206, 0.4));
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(360deg);
+            filter: drop-shadow(0 0 20px rgba(255, 159, 206, 0.8));
+        }
+
+        .service-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Pricing ── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px 40px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 159, 206, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            animation: rotateGradient 10s linear infinite;
+        }
+
+        .pricing-card:hover::before { opacity: 1; }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 177, 153, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 159, 206, 0.3), 0 0 60px rgba(255, 159, 206, 0.2);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-name {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: sectionGlow 3s ease-in-out infinite;
+        }
+
+        .pricing-price {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: sectionGlow 3s ease-in-out infinite;
+            text-align: center;
+        }
+
+        .pricing-period {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .pricing-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .pricing-features {
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 10px 0 10px 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FF9FCE;
+            font-weight: 700;
+            font-size: 18px;
+            filter: drop-shadow(0 0 5px rgba(255, 159, 206, 0.6));
+        }
+
+        .pricing-ideal {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+            padding: 20px;
+            background: rgba(255, 159, 206, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 159, 206, 0.1);
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .pricing-button::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .pricing-button:hover::before { width: 300px; height: 300px; }
+
+        .pricing-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 159, 206, 0.6), 0 0 40px rgba(255, 159, 206, 0.4);
+        }
+
+        /* ── Testimonials ── */
+        .testimonials-section {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonials-intro {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .testimonials-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .testimonials-label {
+            font-size: 16px;
+            color: #FF9FCE;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid rgba(255, 159, 206, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 159, 206, 0.05);
+            margin-top: 20px;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 70px;
+        }
+
+        .testimonials-viewport {
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .testimonial-card {
+            min-width: 100%; width: 100%;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px 60px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 159, 206, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            animation: rotateGradient 10s linear infinite;
+        }
+
+        .testimonial-card:hover::before { opacity: 1; }
+
+        .testimonial-quote {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 60px;
+            color: rgba(255, 159, 206, 0.3);
+            position: absolute;
+            top: -20px; left: -10px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-author {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-name {
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-nav:hover {
+            background: rgba(255, 159, 206, 0.2);
+            border-color: rgba(255, 159, 206, 0.5);
+            box-shadow: 0 0 20px rgba(255, 159, 206, 0.3);
+        }
+
+        .slider-nav-prev { left: 0; }
+        .slider-nav-next { right: 0; }
+
+        .slider-nav::before {
+            content: '';
+            width: 12px; height: 12px;
+            border-top: 2px solid rgba(255, 255, 255, 0.8);
+            border-right: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .slider-nav-prev::before { transform: rotate(-135deg); margin-left: 4px; }
+        .slider-nav-next::before { transform: rotate(45deg); margin-right: 4px; }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .slider-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: linear-gradient(135deg, #FFB199 0%, #FF9FCE 100%);
+            box-shadow: 0 0 10px rgba(255, 159, 206, 0.6);
+            transform: scale(1.2);
+        }
+
+        /* ── Contact ── */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 80px 60px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 159, 206, 0.05) 0%, transparent 70%);
+            animation: rotateGradient 15s linear infinite;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover { transform: translateY(-5px); }
+
+        .contact-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-value {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-value a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: #FFB199;
+            text-shadow: 0 0 15px rgba(255, 177, 153, 0.6);
+        }
+
+        footer {
+            padding: 40px 60px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            nav { padding: 20px 30px; }
+            .logo { font-size: 24px; }
+            .nav-links { gap: 16px; font-size: 13px; }
+            .hero { padding: 100px 30px 60px; }
+            .hero-title { font-size: 60px; letter-spacing: 4px; }
+            .hero-tagline { font-size: 16px; letter-spacing: 4px; }
+            .hero-description { font-size: 16px; }
+            .section { padding: 60px 30px; }
+            .section-title { font-size: 40px; }
+            .section-content { font-size: 18px; }
+            .services-grid { grid-template-columns: 1fr; gap: 30px; }
+            .pricing-grid { grid-template-columns: 1fr; gap: 30px; }
+            .contact-info { flex-direction: column; gap: 30px; }
+            .testimonials-section { padding: 60px 20px; }
+            .testimonials-slider { padding: 0 50px; }
+            .testimonial-card { padding: 40px 30px; }
+            .testimonial-quote { font-size: 18px; }
+            .slider-nav { width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="gradient-orb orb1"></div>
+        <div class="gradient-orb orb2"></div>
+        <div class="gradient-orb orb3"></div>
+    </div>
+
+    <div class="mystical-particles" id="particles"></div>
+    <div class="mystical-symbols" id="symbols"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <nav>
+        <a href="index.html" class="logo">RUH</a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="process.html">Process</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1 class="hero-title">RUH</h1>
+        <p class="hero-tagline">Inspired from Within</p>
+        <p class="hero-description">
+            We create postable content for your social platforms that resonates with soul and authenticity
+        </p>
+        <a href="#contact" class="cta-button">Let's Create Together</a>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="what-we-do" class="section">
+        <h2 class="section-title">What We Do</h2>
+        <p class="section-content">
+            At Ruh, we believe that great content comes from within. We craft engaging, authentic social media content that speaks to the soul of your brand and connects deeply with your audience. Every post, every story, every piece of content is designed to inspire and resonate.
+        </p>
+    </section>
+
+    <section id="services" class="section">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3 class="service-title">Content Creation</h3>
+                <p class="service-description">Stunning visuals and compelling copy that captures your brand's essence and tells your story authentically.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3 class="service-title">Social Strategy</h3>
+                <p class="service-description">Data-driven strategies that align with your brand's soul and connect with your audience on a deeper level.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3 class="service-title">Brand Design</h3>
+                <p class="service-description">Beautiful, cohesive visual identities that reflect the unique spirit of your brand across all platforms.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Content Planning</h3>
+                <p class="service-description">Strategic content calendars that keep your social presence consistent, engaging, and on-brand.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h3 class="service-title">Community Management</h3>
+                <p class="service-description">Building meaningful connections with your audience through authentic engagement and conversation.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3 class="service-title">Video Content</h3>
+                <p class="service-description">Dynamic video content that captures attention and tells your story in the most engaging way possible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <h2 class="section-title">Our Packages</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-name">Essence</h3>
+                    <div class="pricing-price">$599<span class="pricing-period">/month</span></div>
+                    <p class="pricing-tagline">For brands seeking consistency without complexity</p>
+                </div>
+                <div class="pricing-features">
+                    <h4 class="features-title">What's Included:</h4>
+                    <ul class="features-list">
+                        <li>4 custom posts per month across your platforms</li>
+                        <li>Branded content creation (visuals, captions, messaging)</li>
+                        <li>Strategic content calendar & scheduling</li>
+                        <li>Ongoing brand refinement</li>
+                        <li>Hashtag & caption strategy</li>
+                        <li>Light community monitoring</li>
+                        <li>Monthly performance snapshot</li>
+                        <li>All software & tools included</li>
+                    </ul>
+                </div>
+                <p class="pricing-ideal">Ideal for small businesses, startups, and local brands building a polished, professional presence.</p>
+                <center><a href="#contact" class="pricing-button">Get Started</a></center>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-name">Ascend</h3>
+                    <div class="pricing-price">$899<span class="pricing-period">/month</span></div>
+                    <p class="pricing-tagline">For brands ready to scale and be seen</p>
+                </div>
+                <div class="pricing-features">
+                    <h4 class="features-title">What's Included:</h4>
+                    <ul class="features-list">
+                        <li>10–12 custom posts per month (static, carousels, short-form)</li>
+                        <li>Advanced content strategy & storytelling</li>
+                        <li>Full content calendar with optimized posting times</li>
+                        <li>Enhanced hashtag & platform-specific research</li>
+                        <li>Ongoing brand evolution & messaging refinement</li>
+                        <li>Priority support & faster turnaround</li>
+                        <li>Monthly performance breakdown with actionable insights</li>
+                        <li>Growth-focused recommendations</li>
+                        <li>All software & tools included</li>
+                    </ul>
+                </div>
+                <p class="pricing-ideal">Ideal for growing businesses, personal brands, and service providers seeking visibility and momentum.</p>
+                <center><a href="#contact" class="pricing-button">Get Started</a></center>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="testimonials-intro">
+            <h2 class="section-title">Real Brands. Real Results.</h2>
+            <p class="testimonials-subtitle">We let the work speak.</p>
+            <span class="testimonials-label">✦ What Our Clients Say</span>
+        </div>
+        <div class="testimonials-slider">
+            <div class="slider-nav slider-nav-prev" onclick="prevTestimonial()"></div>
+            <div class="slider-nav slider-nav-next" onclick="nextTestimonial()"></div>
+            <div class="testimonials-viewport">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">Before Ruhhify, our Instagram was an afterthought. Now it actually feels like us — and people notice.</p>
+                        <p class="testimonial-author">— <span class="testimonial-name">Sarah M.</span>, Med Spa Owner</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">I was posting inconsistently and burning out trying to keep up. Now I don't think about it — it just happens, and it looks great.</p>
+                        <p class="testimonial-author">— <span class="testimonial-name">James T.</span>, Local Realtor</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">They got our brand immediately. The content calendar alone changed how we operate.</p>
+                        <p class="testimonial-author">— <span class="testimonial-name">D.R.</span>, Boutique Founder</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots">
+                <span class="slider-dot active" onclick="goToTestimonial(0)"></span>
+                <span class="slider-dot" onclick="goToTestimonial(1)"></span>
+                <span class="slider-dot" onclick="goToTestimonial(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="contact-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-content">Ready to create content that truly resonates? Let's start a conversation.</p>
+            <a href="https://calendly.com/hello-ruhhify/30min" class="cta-button" target="_blank">Book a Consultation</a>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value"><a href="mailto:hello@ruhhify.com">hello@ruhhify.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Phone</span>
+                    <span class="contact-value"><a href="tel:813-997-7517">813-997-7517</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Location</span>
+                    <span class="contact-value">Wesley Chapel, FL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Ruh. Inspired from within. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const colors = ['#FFE156', '#FFB199', '#FF9FCE', '#E19FFF'];
+
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 3 + 's';
+            p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        const symbolsContainer = document.getElementById('symbols');
+        const symbolList = ['✧', '✦', '◆', '◇', '○', '◉', '⟡', '⋆', '✵', '❋'];
+        for (let i = 0; i < 15; i++) {
+            const s = document.createElement('div');
+            s.className = 'symbol';
+            s.textContent = symbolList[Math.floor(Math.random() * symbolList.length)];
+            s.style.left = Math.random() * 100 + '%';
+            s.style.color = colors[Math.floor(Math.random() * colors.length)];
+            s.style.animationDelay = Math.random() * 25 + 's';
+            s.style.animationDuration = (Math.random() * 10 + 20) + 's';
+            symbolsContainer.appendChild(s);
+        }
+
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursorGlow.style.opacity = '1';
+        });
+        function animateCursor() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.addEventListener('click', (e) => {
+            const ring = document.createElement('div');
+            ring.className = 'energy-ring';
+            ring.style.cssText = `left:${e.clientX - 150}px;top:${e.clientY - 150}px;position:fixed;pointer-events:none;z-index:9998;`;
+            document.body.appendChild(ring);
+            setTimeout(() => ring.remove(), 4000);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        document.querySelectorAll('.service-card, .pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'particle';
+                        sparkle.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:6px;height:6px;background:${colors[Math.floor(Math.random()*colors.length)]};z-index:10;`;
+                        this.appendChild(sparkle);
+                        setTimeout(() => sparkle.remove(), 3000);
+                    }, i * 100);
+                }
+            });
+        });
+
+        let currentTestimonial = 0;
+        const track = document.getElementById('testimonialsTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalTestimonials = dots.length;
+
+        function updateTestimonial() {
+            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentTestimonial));
+        }
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            updateTestimonial();
+        }
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            updateTestimonial();
+        }
+        function goToTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonial();
+        }
+        setInterval(nextTestimonial, 5000);
+    </script>
+</body>
+</html>
