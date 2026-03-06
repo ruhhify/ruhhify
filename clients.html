@@ -164,9 +164,9 @@ footer{padding:40px 60px;text-align:center;color:rgba(255,255,255,.4);border-top
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <nav>
-  <a href="index.html" class="logo">RUH</a>
+  <a href="/" class="logo">RUH</a>
   <ul class="nav-links">
-    <li><a href="index.html#services">Services</a></li>
+    <li><a href="/#services">Services</a></li>
     <li><a href="process.html">Process</a></li>
     <li><a href="clients.html">Clients</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -176,7 +176,7 @@ footer{padding:40px 60px;text-align:center;color:rgba(255,255,255,.4);border-top
   </button>
 </nav>
 <div class="nav-drawer" id="navDrawer">
-  <a href="index.html#services" onclick="closeDrawer()">Services</a>
+  <a href="/#services" onclick="closeDrawer()">Services</a>
   <a href="process.html"        onclick="closeDrawer()">Process</a>
   <a href="clients.html"        onclick="closeDrawer()">Clients</a>
   <a href="#contact"            onclick="closeDrawer()">Contact</a>
@@ -305,7 +305,7 @@ footer{padding:40px 60px;text-align:center;color:rgba(255,255,255,.4);border-top
     <p class="section-content">Ready to create content that truly resonates? Let's start a conversation.</p>
     <a href="https://calendly.com/hello-ruhhify/30min" class="cta-button" target="_blank">Book a Consultation</a>
     <div class="contact-info">
-      <div class="contact-item"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:hello@ruhhify.com">hello@ruhhify.com</a></span></div>
+      <div class="contact-item"><span class="contact-label">Email</span><span class="contact-value"><a href="/cdn-cgi/l/email-protection#533b363f3f3c1321263b3b3a352a7d303c3e"><span class="__cf_email__" data-cfemail="fe969b929291be8c8b9696979887d09d9193">[email&#160;protected]</span></a></span></div>
       <div class="contact-item"><span class="contact-label">Phone</span><span class="contact-value"><a href="tel:813-997-7517">813-997-7517</a></span></div>
       <div class="contact-item"><span class="contact-label">Location</span><span class="contact-value">Wesley Chapel, FL</span></div>
     </div>
@@ -313,7 +313,7 @@ footer{padding:40px 60px;text-align:center;color:rgba(255,255,255,.4);border-top
 </section>
 <footer><p>© 2026 Ruh. Inspired from within. All rights reserved.</p></footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var colors=['#FFE156','#FFB199','#FF9FCE','#E19FFF'];
 var pc=document.getElementById('particles');
 for(var i=0;i<50;i++){var p=document.createElement('div');p.className='particle';p.style.left=(Math.random()*100)+'%';p.style.top=(Math.random()*100)+'%';p.style.animationDelay=(Math.random()*3)+'s';p.style.animationDuration=(Math.random()*2+2)+'s';pc.appendChild(p);}
@@ -330,8 +330,4 @@ var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){i
 document.querySelectorAll('.client-card,.outcome-card').forEach(function(el,i){el.style.transitionDelay=(i*.08)+'s';obs.observe(el);});
 document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
 var hbg=document.getElementById('hamburger'),drw=document.getElementById('navDrawer');
-function closeDrawer(){hbg.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
-hbg.addEventListener('click',function(){var o=drw.classList.toggle('open');hbg.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
-</script>
-</body>
-</html>
+function closeDrawer(){hbg.classList.remove('open');dr
