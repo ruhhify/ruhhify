@@ -25,7 +25,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;overflow-x:hidden;b
 @keyframes rotateGradient{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 /* Nav */
-nav{position:fixed;top:0;width:100%;padding:26px 60px;display:flex;justify-content:space-between;align-items:center;z-index:2000;background:rgba(10,10,10,.3);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1)}
+nav{position:fixed;top:0;width:100%;padding:26px 60px;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(10,10,10,.3);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1)}
 .logo{font-size:32px;font-weight:700;letter-spacing:3px;text-decoration:none;background:linear-gradient(135deg,#FFE156 0%,#FFB199 40%,#FF9FCE 70%,#E19FFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pulse 3s ease-in-out infinite}
 @keyframes pulse{0%,100%{filter:drop-shadow(0 0 5px rgba(255,159,206,.5))}50%{filter:drop-shadow(0 0 20px rgba(255,159,206,.8))}}
 .nav-links{display:flex;gap:40px;list-style:none}
@@ -35,14 +35,14 @@ nav{position:fixed;top:0;width:100%;padding:26px 60px;display:flex;justify-conte
 .nav-links a:hover::after{width:100%}
 
 /* Hamburger */
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;cursor:pointer;z-index:3000;background:none;border:none;padding:6px;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;z-index:1100;background:none;border:none;padding:4px;flex-shrink:0}
 .hamburger span{display:block;width:100%;height:2px;background:linear-gradient(90deg,#FFB199,#FF9FCE);border-radius:2px;transition:all .35s ease;transform-origin:center}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(10,10,10,.97);backdrop-filter:blur(20px);z-index:2500;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(-20px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;-webkit-tap-highlight-color:transparent}
-.nav-drawer.open{opacity:1;transform:translateY(0);pointer-events:all}
-.nav-drawer a{font-size:28px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;padding:20px 40px;letter-spacing:3px;text-transform:uppercase;transition:all .3s ease;display:block;text-align:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:64px;display:flex;align-items:center;justify-content:center}
+.nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(10,10,10,.97);backdrop-filter:blur(20px);z-index:1050;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(-20px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.nav-drawer.open{opacity:1;transform:translateY(0);pointer-events:all;visibility:visible}
+.nav-drawer a{font-size:28px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;padding:16px 40px;letter-spacing:3px;text-transform:uppercase;transition:all .3s ease;display:block;text-align:center}
 .nav-drawer a:hover{color:#FFB199;text-shadow:0 0 20px rgba(255,177,153,.6)}
 
 /* Hero */
@@ -329,5 +329,31 @@ document.querySelectorAll('.client-card,.outcome-card').forEach(function(card){c
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12});
 document.querySelectorAll('.client-card,.outcome-card').forEach(function(el,i){el.style.transitionDelay=(i*.08)+'s';obs.observe(el);});
 document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+
 var hbg=document.getElementById('hamburger'),drw=document.getElementById('navDrawer');
-function closeDrawer(){hbg.classList.remove('open');dr
+function closeDrawer(){
+  hbg.classList.remove('open');
+  drw.classList.remove('open');
+  drw.style.visibility='hidden';
+  drw.style.pointerEvents='none';
+  document.body.style.overflow='';
+}
+function openDrawer(){
+  hbg.classList.add('open');
+  drw.classList.add('open');
+  drw.style.visibility='visible';
+  drw.style.pointerEvents='all';
+  document.body.style.overflow='hidden';
+}
+hbg.addEventListener('click',function(e){
+  e.stopPropagation();
+  drw.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+hbg.addEventListener('touchstart',function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  drw.classList.contains('open') ? closeDrawer() : openDrawer();
+},{passive:false});
+</script>
+</body>
+</html>
